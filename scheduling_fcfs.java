@@ -55,6 +55,7 @@ public class scheduling_fcfs {
         float sumTAT = 0;
         float sumWT = 0;
 
+        // logic
         for (int i = 0; i < n; i++) {
             // CPU may be idle if next process arrives later than current time
             if (time < at[i]) {
