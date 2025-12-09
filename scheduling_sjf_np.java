@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class scheduling_sjf_p {
+public class scheduling_sjf_np {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
