@@ -6,14 +6,13 @@ public class scheduling_fcfs {
         System.out.print("Enter number of processes: ");
         int n = sc.nextInt();
 
-        int[] at = new int[n];   // arrival time
-        int[] bt = new int[n];   // burst time
-        int[] pid = new int[n];  // process id (P1, P2, ...)
-        int[] ct = new int[n];   // completion time
-        int[] tat = new int[n];  // turn around time
-        int[] wt = new int[n];   // waiting time
+        int[] at = new int[n];
+        int[] bt = new int[n];
+        int[] pid = new int[n];
+        int[] ct = new int[n];
+        int[] tat = new int[n];
+        int[] wt = new int[n];
 
-        // taking input collectively
         System.out.println("Enter arrival times:");
         for (int i = 0; i < n; i++) {
             System.out.print("AT for P" + (i + 1) + ": ");
@@ -27,22 +26,17 @@ public class scheduling_fcfs {
             bt[i] = sc.nextInt();
         }
 
-        // Sort by arrival time (FCFS order)
-        // simple bubble sort for parallel arrays
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
                 if (at[j] > at[j + 1]) {
-                    // swap AT
                     int temp = at[j];
                     at[j] = at[j + 1];
                     at[j + 1] = temp;
 
-                    // swap BT
                     temp = bt[j];
                     bt[j] = bt[j + 1];
                     bt[j + 1] = temp;
 
-                    // swap PID
                     temp = pid[j];
                     pid[j] = pid[j + 1];
                     pid[j + 1] = temp;
@@ -50,14 +44,11 @@ public class scheduling_fcfs {
             }
         }
 
-        // Calculate CT, TAT, WT
         int time = 0;
         float sumTAT = 0;
         float sumWT = 0;
 
-        // logic
         for (int i = 0; i < n; i++) {
-            // CPU may be idle if next process arrives later than current time
             if (time < at[i]) {
                 time = at[i];
             }
@@ -72,7 +63,6 @@ public class scheduling_fcfs {
             sumWT += wt[i];
         }
 
-        // Output table
         System.out.println();
         System.out.println("PID\tAT\tBT\tCT\tTAT\tWT");
         for (int i = 0; i < n; i++) {

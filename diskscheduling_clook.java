@@ -21,7 +21,7 @@ public class diskscheduling_clook {
         System.out.print("Enter direction (1 = right/up, 0 = left/down): ");
         int direction = sc.nextInt();
 
-        Arrays.sort(req); // sorted list
+        Arrays.sort(req);
 
         int totalMovement = 0;
         int pos = head;
@@ -29,9 +29,7 @@ public class diskscheduling_clook {
         System.out.println("\nOrder of service:");
         System.out.print(head);
 
-        // ---- CLOOK: Move Right First ----
         if (direction == 1) {
-            // Serve all requests >= head
             for (int i = 0; i < n; i++) {
                 if (req[i] >= head) {
                     totalMovement += Math.abs(req[i] - pos);
@@ -40,7 +38,6 @@ public class diskscheduling_clook {
                 }
             }
 
-            // Jump to smallest request (circular movement)
             for (int i = 0; i < n; i++) {
                 if (req[i] < head) {
                     totalMovement += Math.abs(pos - req[0]);
@@ -50,7 +47,6 @@ public class diskscheduling_clook {
                 }
             }
 
-            // Serve remaining (smaller) requests
             for (int i = 1; i < n; i++) {
                 if (req[i] < head) {
                     totalMovement += Math.abs(req[i] - pos);
@@ -60,10 +56,8 @@ public class diskscheduling_clook {
             }
         }
 
-        // ---- CLOOK: Move Left First ----
         else {
 
-            // Serve all requests <= head (from rightmost to leftmost)
             for (int i = n - 1; i >= 0; i--) {
                 if (req[i] <= head) {
                     totalMovement += Math.abs(req[i] - pos);
@@ -72,7 +66,6 @@ public class diskscheduling_clook {
                 }
             }
 
-            // Jump to largest request (circular jump)
             for (int i = n - 1; i >= 0; i--) {
                 if (req[i] > head) {
                     totalMovement += Math.abs(pos - req[n - 1]);
@@ -82,7 +75,6 @@ public class diskscheduling_clook {
                 }
             }
 
-            // Serve remaining (higher) requests
             for (int i = n - 2; i >= 0; i--) {
                 if (req[i] > head) {
                     totalMovement += Math.abs(req[i] - pos);

@@ -7,8 +7,8 @@ public class diskscheduling_sstf {
         System.out.print("Enter number of disk requests: ");
         int n = sc.nextInt();
 
-        int[] req = new int[n];   // request sequence
-        boolean[] visited = new boolean[n]; // to mark served requests
+        int[] req = new int[n];
+        boolean[] visited = new boolean[n];
 
         System.out.print("Enter current head position: ");
         int head = sc.nextInt();
@@ -23,12 +23,10 @@ public class diskscheduling_sstf {
         System.out.println("\nOrder of service:");
         System.out.print(head);
 
-        // SSTF loop – pick closest request each time
         for (int count = 0; count < n; count++){            
             int idx = -1;
             int minDist = Integer.MAX_VALUE;
 
-            // find the nearest unvisited request
             for (int i = 0; i < n; i++) {
                 if (!visited[i]) {
                     int distance = Math.abs(req[i] - head);
@@ -40,7 +38,6 @@ public class diskscheduling_sstf {
                 }
             }
 
-            // service the closest request
             visited[idx] = true;
             totalMovement += minDist;
             head = req[idx];

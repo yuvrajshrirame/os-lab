@@ -14,14 +14,14 @@ public class diskscheduling_cscan {
         int head = sc.nextInt();
 
         System.out.print("Enter maximum cylinder number: "); 
-        int maxCyl = sc.nextInt(); // e.g., 199
+        int maxCyl = sc.nextInt();
 
         System.out.println("Enter request sequence:");
         for (int i = 0; i < n; i++) {
             req[i] = sc.nextInt();
         }
 
-        Arrays.sort(req);  // sorted list helps with scanning
+        Arrays.sort(req);
 
         int totalMovement = 0;
         int pos = head;
@@ -29,9 +29,6 @@ public class diskscheduling_cscan {
         System.out.println("\nOrder of service:");
         System.out.print(head);
 
-        // ---- CSCAN always scans left → right ----
-
-        // 1. Serve requests to the right of head
         for (int i = 0; i < n; i++) {
             if (req[i] >= head) {
                 totalMovement += Math.abs(req[i] - pos);
@@ -40,17 +37,14 @@ public class diskscheduling_cscan {
             }
         }
 
-        // 2. Go to end of disk
         totalMovement += Math.abs(maxCyl - pos);
         pos = maxCyl;
         System.out.print(" -> " + pos);
 
-        // 3. Jump to 0 (circular jump, but movement counted)
         totalMovement += Math.abs(maxCyl - 0);
         pos = 0;
         System.out.print(" -> " + pos);
 
-        // 4. Serve remaining requests from the start
         for (int i = 0; i < n; i++) {
             if (req[i] < head) {
                 totalMovement += Math.abs(req[i] - pos);
